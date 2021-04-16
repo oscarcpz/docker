@@ -1,0 +1,21 @@
+version: "2"
+services:
+  postgis:
+    image: mdillon/postgis
+    container_name: postgis
+    restart: always
+    ports:
+      - "6432:5432"
+    environment:
+      - PGDATA=/data/postgis/pgdata
+      - POSTGRES_INITDB_WALDIR=/data/postgis/waldir
+    volumes:
+      - ${PGDATA_PATH}:/data/postgis/pgdata
+      - ${WALDIR_PATH}:/data/postgis/waldir
+      - ${BACKUP_PATH}:/root/backup
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8888:8080"
